@@ -5,7 +5,10 @@
     "paths": {
       "@/*": [
         "./*"
-      ]
+      ],
+      "@interfaces/*": [
+        "./interfaces/*"
+      ],
     }
   },
   "include": [

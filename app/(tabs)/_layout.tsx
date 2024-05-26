@@ -1,52 +1,47 @@
-import { View, Text, Image, ImageURISource } from 'react-native'
+import { View, Text } from 'react-native'
 import { Tabs } from 'expo-router'
+import { Entypo, FontAwesome, MaterialIcons, Ionicons } from '@expo/vector-icons';
+import { ITabIconProp, ITabInfo } from '@/interfaces';
+import React from 'react';
+import { IconProps } from 'react-native-vector-icons/Icon';
 
-
-type TabIconProps = {
-    icon: ImageURISource
-    color: string
-    name: string
-    focused: boolean
-};
-
-const TabIcon = ( props : TabIconProps ) => {
+const TabIcon: React.FC<ITabIconProp> = ( props : ITabIconProp ) => {
     return (
         <View className='items-center justify-center gap-2'>
-            <Image source={props.icon} resizeMode='contain' tintColor={props.color} className='w-6 h-6'/>
-            <Text className={`${props.focused ? 'from-teal-500' : 'from-teal-950'} text-xs`} 
-                style={{ color: props.color }}>
-                {props.name}
+            <props.iconComponent color={props.color} size={props.size}/>
+            <Text style={{ color: props.color }}>
+                {props.title}
             </Text>
         </View>
     )
 }
 
 const TabsLayout = () => {
-    const tabsInfo: { tabName: string, name: string, iconResource: ImageURISource } [] = [
+    const tabsInfo: ITabInfo [] = [
         {
             tabName: 'home',
-            name: 'Home',
-            iconResource:  { uri: 'https://cdn-icons-png.flaticon.com/512/25/25694.png' }
+            title: 'Home',
+            component: (props: Partial<IconProps> | undefined) => <Entypo name='home' size={props?.size} color={props?.color as string}/>
         },
         {
             tabName: 'memory',
-            name: 'Memory',
-            iconResource:  { uri: 'https://cdn.iconscout.com/icon/free/png-256/free-instagram-reel-4560268-3789542.png' }
+            title: 'Memory',
+            component: (props: Partial<IconProps> | undefined) => <MaterialIcons name='view-carousel' size={props?.size} color={props?.color as string}/>
         },
         {
             tabName: 'createEvent',
-            name: 'New Event',
-            iconResource:  { uri: 'https://static.thenounproject.com/png/2318221-200.png' }
+            title: 'New Event',
+            component: (props: Partial<IconProps> | undefined) => <Entypo name='squared-plus' size={props?.size} color={props?.color as string}/>
         },
         {
             tabName: 'notification',
-            name: 'Notification',
-            iconResource:  { uri: 'https://cdn-icons-png.flaticon.com/512/3119/3119338.png' }
+            title: 'Notification',
+            component: (props: Partial<IconProps> | undefined) => <FontAwesome name='bell' size={props?.size} color={props?.color as string}/>
         },
         {
             tabName: 'profile',
-            name: 'Profile',
-            iconResource:  { uri: 'https://cdn-icons-png.freepik.com/256/552/552848.png?semt=ais_hybrid' }
+            title: 'Profile',
+            component: (props: Partial<IconProps> | undefined) => <Ionicons name='person' size={props?.size} color={props?.color as string}/>
         }
     ]
   return (
@@ -54,22 +49,19 @@ const TabsLayout = () => {
         <Tabs
             screenOptions={{
                 tabBarShowLabel: false, // Hide labels
-                tabBarActiveTintColor: '#FFA001', // Active tab color
-                tabBarInactiveTintColor: '#CDCDE0', // Inactive tab color
+                tabBarActiveTintColor: '#E26894', // Active tab color
+                tabBarInactiveTintColor: '#CCCCCC', // Inactive tab color
                 tabBarStyle: {
-                    backgroundColor: '#161622', // Tab bar background
                     borderTopWidth: 1,  // Top border
-                    borderTopColor: '#232533', // Top border color
-                    height: 84, // Tab bar height
+                    height: 100, // Tab bar height
                 }
             }}
         >
             {tabsInfo.map((tab) => (
                 <Tabs.Screen name={tab.tabName} options={{
-                    title: tab.tabName,
                     headerShown: false,
                     tabBarIcon: ({ color, focused }) => (
-                        <TabIcon icon={tab.iconResource} color={color} name={tab.name} focused={focused}/>
+                        <TabIcon key={tab.title} iconComponent={tab.component} title={tab.title} color={color} focused={focused} size={24}/>
                     )
                 }}/>
             ))}
