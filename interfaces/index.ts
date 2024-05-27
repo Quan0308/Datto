@@ -1,2 +1,2 @@
-export * from './TabIconProp.interface'
-export * from './TabInfo.interface'
+export * from './TabIconProp.interface';
+export * from './TabInfo.interface';
