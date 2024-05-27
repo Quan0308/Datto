@@ -1,24 +1,41 @@
-import { useFonts } from 'expo-font'
-import { SplashScreen, Stack } from 'expo-router'
-import React, { useEffect } from 'react'
+import { useFonts } from 'expo-font';
+import { SplashScreen, Stack } from 'expo-router';
+import { ThemeProvider, DefaultTheme } from '@react-navigation/native';
+import React, { useEffect } from 'react';
 
-const RootLayout = () => {
-  const [fontsLoad, error ] = useFonts({
-        "SpaceMono-Regular": require("../assets/fonts/SpaceMono-Regular.ttf"),
-    })
+import { Colors } from '@/constants';
 
-    useEffect(() => {
-        if(error)  throw error
-        if(fontsLoad) SplashScreen.hideAsync()
-    }, [fontsLoad, error])
+export default function RootLayout() {
+  const [fontsLoad, error] = useFonts({
+    'SpaceMono-Regular': require('../assets/fonts/SpaceMono-Regular.ttf'),
+  });
 
-    if(!fontsLoad && !error) return null
+  useEffect(() => {
+    if (error) throw error;
+    if (fontsLoad) SplashScreen.hideAsync();
+  }, [fontsLoad, error]);
+
+  if (!fontsLoad && !error) return null;
   //name="index" is the name of the screen (file) that will be rendered
-  return (
-   <Stack>
-    <Stack.Screen name="index" options={{ headerShown: false }} /> 
-   </Stack>
-  )
-}
+  const MyTheme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      primary: Colors.primary.default,
+      background: Colors.light.background,
+      card: Colors.light.background,
+      text: Colors.light.text,
+      border: Colors.light.background,
+      notification: Colors.error.default,
+    },
+    dark: false,
+  };
 
-export default RootLayout
+  return (
+    <ThemeProvider value={MyTheme}>
+      <Stack>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+      </Stack>
+    </ThemeProvider>
+  );
+}

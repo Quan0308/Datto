@@ -5,7 +5,16 @@
     "paths": {
       "@/*": [
         "./*"
-      ]
+      ],
+      "@interfaces/*": [
+        "./interfaces/*"
+      ],
+      "@components/*": [
+        "./components/*"
+      ],
+      "@types/*": [
+        "./types/*"
+      ],
     }
   },
   "include": [
