@@ -58,16 +58,21 @@ export default function TabsLayout() {
       <Tabs
         screenOptions={{
           tabBarShowLabel: false, // Hide labels
-          tabBarActiveTintColor: '#E26894', // Active tab color
           tabBarInactiveTintColor: '#CCCCCC', // Inactive tab color
           tabBarStyle: {
             borderTopWidth: 1, // Top border
             height: 100, // Tab bar height
+            elevation: 5, // Shadow
+            shadowColor: '#000', // Shadow color
+            shadowOffset: { width: 0, height: 2 }, // Shadow offset
+            shadowOpacity: 0.25, // Shadow opacity
+            shadowRadius: 3.84, // Shadow radius
           },
         }}
       >
         {tabsInfo.map((tab) => (
           <Tabs.Screen
+            key={tab.title}
             name={tab.tabName}
             options={{
               headerShown: false,

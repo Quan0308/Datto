@@ -1,6 +1,9 @@
 import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
+import { ThemeProvider, DefaultTheme } from '@react-navigation/native';
 import React, { useEffect } from 'react';
+
+import { Colors } from '@/constants';
 
 export default function RootLayout() {
   const [fontsLoad, error] = useFonts({
@@ -14,9 +17,25 @@ export default function RootLayout() {
 
   if (!fontsLoad && !error) return null;
   //name="index" is the name of the screen (file) that will be rendered
+  const MyTheme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      primary: Colors.primary.default,
+      background: Colors.light.background,
+      card: Colors.light.background,
+      text: Colors.light.text,
+      border: Colors.light.background,
+      notification: Colors.error.default,
+    },
+    dark: false,
+  };
+
   return (
-    <Stack>
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-    </Stack>
+    <ThemeProvider value={MyTheme}>
+      <Stack>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+      </Stack>
+    </ThemeProvider>
   );
 }
