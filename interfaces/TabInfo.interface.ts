@@ -1,7 +1,8 @@
-import { IconProps } from "react-native-vector-icons/Icon";
+import React from 'react';
 
-export interface ITabInfo  {
-    title: string;
-    tabName: string;
-    component: React.ComponentType<Partial<IconProps> | undefined>;
+import { IconProps } from '@/types';
+export interface ITabInfo {
+  title: string;
+  tabName: string;
+  component: React.ComponentType<Partial<IconProps> | undefined>;
 }

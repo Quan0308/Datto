@@ -1,9 +1,11 @@
-import { IconProps } from "react-native-vector-icons/Icon";
+import React from 'react';
 
-export interface ITabIconProp {
-    iconComponent: React.ComponentType<Partial<IconProps> | undefined>;
-    title: string;
-    color: string;
-    focused: boolean;
-    size: number;
+import { IconProps } from '@/types';
+
+export interface ITabItemProp {
+  iconComponent: React.ComponentType<Partial<IconProps> | undefined>;
+  title: string;
+  color: string;
+  focused: boolean;
+  size: number;
 }
