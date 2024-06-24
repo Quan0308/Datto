@@ -1,13 +1,20 @@
-import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
 import { ThemeProvider, DefaultTheme } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 
 import { Colors } from '@/constants';
+import {
+  BeVietnamPro_400Regular,
+  BeVietnamPro_500Medium,
+  BeVietnamPro_600SemiBold,
+  useFonts,
+} from '@expo-google-fonts/be-vietnam-pro';
 
 export default function RootLayout() {
   const [fontsLoad, error] = useFonts({
-    'SpaceMono-Regular': require('../assets/fonts/SpaceMono-Regular.ttf'),
+    BeVietnamPro_400Regular,
+    BeVietnamPro_500Medium,
+    BeVietnamPro_600SemiBold,
   });
 
   useEffect(() => {
